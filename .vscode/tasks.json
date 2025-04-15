@@ -1,0 +1,68 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Build All PDFs",
+        "type": "shell",
+        "command": "make all",
+       "group": {
+        "kind": "build",
+        "isDefault": true
+        },
+        "problemMatcher": [],
+        "detail": "Convert all supported files in input/ to PDFs and merge them.",
+        "presentation": {
+          "reveal": "always",
+          "panel": "shared"
+        }
+      },
+      {
+        "label": "Merge PDFs Only",
+        "type": "shell",
+        "command": "make merge",
+        "problemMatcher": [],
+        "detail": "Only merge existing PDFs in output/ folder."
+      },
+      {
+        "label": "Convert & Generate Merged-only PDF",
+        "type": "shell",
+        "command": "make merged-only",
+        "problemMatcher": [],
+        "detail": "skip individual file conversion & Only generate a merged PDF from input/,"
+      },
+      {
+        "label": "Upload Merged PDF",
+        "type": "shell",
+        "command": "make upload",
+        "options": {
+          "envFile": "${workspaceFolder}/config.env"
+        },
+        "problemMatcher": [],
+        "detail": "Uploads the merged PDF to cloud (Google Drive, Dropbox, etc.)."
+      },
+      {
+        "label": "Email Merged PDF",
+        "type": "shell",
+        "command": "make email",
+        "options": {
+          "envFile": "${workspaceFolder}/config.env"
+        },
+        "problemMatcher": [],
+        "detail": "Emails the merged PDF using SMTP configuration in config.env."
+      },
+      {
+        "label": "Clean Output Directory",
+        "type": "shell",
+        "command": "make clean",
+        "problemMatcher": [],
+        "detail": "Deletes all generated PDFs from the output folder."
+      },
+      {
+        "label": "List Available Input Files",
+        "type": "shell",
+        "command": "make list",
+        "problemMatcher": [],
+        "detail": "Lists all files available for conversion inside the input folder."
+      }
+    ]
+  }
