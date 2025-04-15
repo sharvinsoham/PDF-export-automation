@@ -1,23 +1,26 @@
 #!/bin/bash
 
-INPUT_DIR=$(realpath "$1")
-OUTPUT_DIR=$(realpath "$2")
+# Store raw paths
+RAW_INPUT="$1"
+RAW_OUTPUT="$2"
 
-# Safeguard: prevent output to root or empty paths
-# if [[ "$OUTPUT_DIR" == "/" || -z "$OUTPUT_DIR" ]]; then
-#   echo "ERROR: Output directory is invalid: '$OUTPUT_DIR'"
-#   exit 1
-# fi
+# Create them if missing
+mkdir -p "$RAW_INPUT"
+mkdir -p "$RAW_OUTPUT"
 
-# Check if the input directory exists
-if [ ! -d "$INPUT_DIR" ]; then
+# Now resolve absolute paths safely
+INPUT_DIR=$(realpath "$RAW_INPUT")
+OUTPUT_DIR=$(realpath "$RAW_OUTPUT")
+MODE=$3
+
+# Validate that input exists after creation
+if [[ ! -d "$INPUT_DIR" ]]; then
   echo "ERROR: Input directory does not exist: '$INPUT_DIR'"
   exit 1
 fi
 
-MODE=$3
-
-if [ ! -d "$OUTPUT_DIR" ]; then
+if [[ ! -d "$OUTPUT_DIR" ]]; then
+  echo "Creating output directory at: $OUTPUT_DIR"
   mkdir -p "$OUTPUT_DIR"
 fi
 
